@@ -53,8 +53,7 @@ def get_fieldsets(model):
 
 
 class DownloadFileView(DataExportMixin, View):
-
-    @method_decorator(staff_member_required)
+    
     def dispatch(self, *args, **kwargs):
         return super(DownloadFileView, self).dispatch(*args, **kwargs)
 
