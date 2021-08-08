@@ -32,5 +32,5 @@ urlpatterns = [
 
 if not hasattr(settings, 'REPORT_BUILDER_FRONTEND') or settings.REPORT_BUILDER_FRONTEND:
     urlpatterns += [
-        url(r'^', staff_member_required(views.ReportSPAView.as_view()), name="report_builder"),
+        url(r'^', views.ReportSPAView.as_view(), name="report_builder"),
     ]
