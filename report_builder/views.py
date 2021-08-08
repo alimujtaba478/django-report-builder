@@ -53,7 +53,7 @@ def get_fieldsets(model):
 
 
 class DownloadFileView(DataExportMixin, View):
-    
+
     def dispatch(self, *args, **kwargs):
         return super(DownloadFileView, self).dispatch(*args, **kwargs)
 
@@ -83,7 +83,7 @@ class DownloadFileView(DataExportMixin, View):
                 report_id, request.user.pk, file_type, to_response=True)
 
 
-@staff_member_required
+# @staff_member_required
 def ajax_add_star(request, pk):
     """ Star or unstar report for user
     """
@@ -98,7 +98,7 @@ def ajax_add_star(request, pk):
     return HttpResponse(added)
 
 
-@staff_member_required
+# @staff_member_required
 def create_copy(request, pk):
     """ Copy a report including related fields """
     report = get_object_or_404(Report, pk=pk)
@@ -158,7 +158,7 @@ class ExportToReport(DownloadFileView, TemplateView):
         return self.render_to_response(context)
 
 
-@staff_member_required
+# @staff_member_required
 def check_status(request, pk, task_id):
     """ Check if the asyncronous report is ready to download """
     from celery.result import AsyncResult
