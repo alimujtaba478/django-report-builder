@@ -65,9 +65,10 @@ WSGI_APPLICATION = 'report_builder_demo.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
+        'NAME': 'django_report_builder',
         'USER': 'postgres',
-        'HOST': 'db',
+        'HOST': '',
+        'PASSWORD': '12345678',
         'PORT': 5432,
     }
 }
