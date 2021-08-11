@@ -12,6 +12,7 @@ from six import string_types
 from .utils import duplicate
 from .models import Report
 from .mixins import DataExportMixin
+from rest_framework.views import APIView
 
 User = get_user_model()
 
@@ -52,7 +53,7 @@ def get_fieldsets(model):
     return fieldsets
 
 
-class DownloadFileView(DataExportMixin, View):
+class DownloadFileView(DataExportMixin, APIView):
 
     def dispatch(self, *args, **kwargs):
         return super(DownloadFileView, self).dispatch(*args, **kwargs)
