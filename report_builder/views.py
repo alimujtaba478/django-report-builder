@@ -60,12 +60,12 @@ class DownloadFileView(DataExportMixin, View):
     def process_report(self, report_id, user_id,
                        file_type, to_response, queryset=None):
         report = get_object_or_404(Report, pk=report_id)
-        user = User.objects.get(pk=user_id)
+        # user = User.objects.get(pk=user_id)
 
         if to_response:
-            return report.run_report(file_type, user, queryset)
-        else:
-            report.run_report(file_type, user,  queryset, asynchronous=True)
+            return report.run_report(file_type, queryset)
+        # else:
+        #     report.run_report(file_type, user,  queryset, asynchronous=True)
 
     def get(self, request, *args, **kwargs):
         print(request)
