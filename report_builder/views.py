@@ -8,7 +8,6 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, get_object_or_404
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView, View
-from rest_framework.views import APIView
 from six import string_types
 from .utils import duplicate
 from .models import Report
@@ -53,7 +52,7 @@ def get_fieldsets(model):
     return fieldsets
 
 
-class DownloadFileView(DataExportMixin, APIView):
+class DownloadFileView(DataExportMixin, View):
 
     def dispatch(self, *args, **kwargs):
         return super(DownloadFileView, self).dispatch(*args, **kwargs)
