@@ -68,6 +68,8 @@ class DownloadFileView(DataExportMixin, View):
             report.run_report(file_type, user,  queryset, asynchronous=True)
 
     def get(self, request, *args, **kwargs):
+        print(request)
+        print(request.user)
         report_id = kwargs['pk']
         file_type = kwargs.get('filetype')
         if getattr(settings, 'REPORT_BUILDER_ASYNC_REPORT', False):
