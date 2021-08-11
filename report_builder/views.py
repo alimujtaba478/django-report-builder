@@ -8,6 +8,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, get_object_or_404
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView, View
+from rest_framework.views import APIView
 from six import string_types
 from .utils import duplicate
 from .models import Report
@@ -52,7 +53,7 @@ def get_fieldsets(model):
     return fieldsets
 
 
-class DownloadFileView(DataExportMixin, View):
+class DownloadFileView(DataExportMixin, APIView):
 
     def dispatch(self, *args, **kwargs):
         return super(DownloadFileView, self).dispatch(*args, **kwargs)
@@ -60,16 +61,14 @@ class DownloadFileView(DataExportMixin, View):
     def process_report(self, report_id, user_id,
                        file_type, to_response, queryset=None):
         report = get_object_or_404(Report, pk=report_id)
-        # user = User.objects.get(pk=user_id)
+        user = User.objects.get(pk=user_id)
 
         if to_response:
-            return report.run_report(file_type, queryset)
-        # else:
-        #     report.run_report(file_type, user,  queryset, asynchronous=True)
+            return report.run_report(file_type, user, queryset)
+        else:
+            report.run_report(file_type, user,  queryset, asynchronous=True)
 
     def get(self, request, *args, **kwargs):
-        print(request)
-        print(request.user)
         report_id = kwargs['pk']
         file_type = kwargs.get('filetype')
         if getattr(settings, 'REPORT_BUILDER_ASYNC_REPORT', False):
